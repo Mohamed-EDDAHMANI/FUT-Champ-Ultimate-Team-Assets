@@ -1,11 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <div class="projectContainer">
+        <header class="header">
+            <div class="headerContainer">
+                <div class="logo"><img src="src/assets/img/footLogo.jpg" alt=""></div>
+                <div class="inputSearch"><i class="fa-solid fa-magnifying-glass" style="color: white;"></i><input
+                        type="text" placeholder="Searsh">
+                    <h4>FUT CHAMP</h4>
+                </div>
+                <ul>
+                    <li>Players</li>
+                    <li>Squads</li>
+                    <li>Market</li>
+                    <li>Evolutions</li>
+                </ul>
+                <button>Sing in</button>
+            </div>
+        </header>
+        <div class="bigContainer">
+            <div class="squadContainer">
+                <div class="squadStadium">
+                    <svg viewBox="0 0 904 650" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M903 649.439H1L120.311 1H783.788L903 649.439Z" fill="#404040" stroke="#696969" stroke-miterlimit="10"/>
+                        <path d="M69.8843 275.038H834.169" stroke="#696969" stroke-miterlimit="10"/>
+                        <path d="M550.992 275.425C553.194 321.703 508.921 360.763 452.019 360.763C395.117 360.763 350.853 321.703 353.062 275.425C355.172 231.123 399.452 196.564 452.035 196.564C504.618 196.564 548.89 231.115 550.992 275.425Z" stroke="#696969" stroke-miterlimit="10"/>
+                        <path d="M541.288 71.4008C543.078 109.009 503.086 140.632 451.897 140.632C400.708 140.632 360.732 109.017 362.53 71.4008C364.259 35.2446 404.251 6.93591 451.92 6.93591C499.582 6.93591 539.574 35.2446 541.288 71.4008Z" stroke="#696969" stroke-miterlimit="10"/>
+                        <path d="M269.125 96.4996H640.093L630.663 1.1532H278.312L269.125 96.4996Z" fill="#404040" stroke="#696969" stroke-miterlimit="10"/>
+                        <path d="M371.922 54.7625H532.542L530.219 1.13715H374.245L371.922 54.7625Z" stroke="#696969" stroke-miterlimit="10"/>
+                        <path d="M343.464 530.333C346.061 474.554 395.78 431.261 454.624 431.261C513.469 431.261 563.279 474.554 565.998 530.333C568.855 588.91 519.151 638.6 454.853 638.6C390.554 638.6 340.737 588.91 343.471 530.333H343.464Z" stroke="#696969" stroke-miterlimit="10"/>
+                        <path d="M675.597 492.572H227.26L211.911 649.198H690.84L675.597 492.572Z" fill="#404040" stroke="#696969" stroke-miterlimit="10"/>
+                        <path d="M556.362 556.642H352.353L348.43 649.238H560.453L556.362 556.642Z" stroke="#696969" stroke-miterlimit="10"/>
+                    </svg>
+                </div>
+
+            </div>
+            <div class="formuler">
+                <div class="formContainer">
+                    <div>
+                        <h3>Add player</h3>
+
+                    </div>
+
+                    <section class="section1" style="display: none;">
+                        <h2>Formation</h2>
+                        <select name="mode" id="mode">
+                            <option>4-4-2</option>
+                            <option>4-3-3</option>
+                        </select>
+                    </section>
+
+                    <section class="section2">
+                        <form action="" id="formData">
+                            <div class="infoInputs">
+                                <div>
+                                    <label for="">Name</label>
+                                    <input type="text" id="name" name="name">
+                                </div>
+                                <div>
+                                    <label for="">Photo</label>
+                                    <input type="file" id="photo" accept="image/*" name="photo">
+                                </div>
+                                <div>
+                                    <label for="">Position</label>
+                                    <select name="" id="positionSelect">
+                                        <option value="ST">ST</option>
+                                        <option value="LW">LW</option>
+                                        <option value="RW">RW</option>
+                                        <option value="CM">CM</option>
+                                        <option value="LB">LB</option>
+                                        <option value="CB">CB</option>
+                                        <option value="RB">RB</option>
+                                        <option value="GK">GK</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="">Nationality</label>
+                                    <input type="text" id="nationality" name="nationality">
+                                </div>
+                                <div>
+                                    <label for="">Flag</label>
+                                    <input type="file" id="flag" accept="image/*" name="flag">
+                                </div>
+                                <div>
+                                    <label for="">Club</label>
+                                    <input type="text" id="club" name="club">
+                                </div>
+                                <div>
+                                    <label for="">Logo</label>
+                                    <input type="file" id="logo" accept="image/*" name="logo">
+                                </div>
+                            </div>
+                            <div class="numInputs" id="numInputs">
+                                <div class="div">
+                                    <label for="">RAT</label>
+                                    <input type="number" name="rating">
+                                </div>
+                                <div class="div">
+                                    <label for="">PAC</label>
+                                    <input type="number" name="pace">
+                                </div>
+                                <div class="div">
+                                    <label for="">SHO</label>
+                                    <input type="number" name="shooting">
+                                </div>
+                                <div class="div">
+                                    <label for="">PAS</label>
+                                    <input type="number" name="passing">
+                                </div>
+                                <div class="div">
+                                    <label for="">DRI</label>
+                                    <input type="number" name="dribbling">
+                                </div>
+                                <div class="div">
+                                    <label for="">DEF</label>
+                                    <input type="number" name="defending">
+                                </div>
+                                <div class="div">
+                                    <label for="">PHY</label>
+                                    <input type="number" name="physical">
+                                </div>
+                                <button type="submit" class="createBtn">Submit</button>
+                            </div>
+                            <div id="numInputsGK">
+                                <div>
+                                    <label for="">RAT</label>
+                                    <input type="number" name="rating">
+                                </div>
+                                <div>
+                                    <label for="">DIV</label>
+                                    <input type="number" name="diving">
+                                </div>
+                                <div>
+                                    <label for="">HAN</label>
+                                    <input type="number" name="handling">
+                                </div>
+                                <div>
+                                    <label for="">KIC</label>
+                                    <input type="number" name="kicking">
+                                </div>
+                                <div>
+                                    <label for="">REF</label>
+                                    <input type="number" name="reflexes">
+                                </div>
+                                <div>
+                                    <label for="">SPD</label>
+                                    <input type="number" name="speed">
+                                </div>
+                                <div>
+                                    <label for="">POS</label>
+                                    <input type="number" name="positioning">
+                                </div>
+                                <button type="submit" class="createBtn">Submit</button>
+                            </div>
+                        </form>
+                    </section>
+
+                </div>
+                <div class="playersContainer">
+                    <div class="displayicon">
+                        <i class="fa-solid fa-futbol" id="redouBtn" style="color: #ffffff;"></i>
+                    </div>
+                    <div id="cardsChangementsContainer">
+                        <div id="cardChangements">
+                            <div class="editContainer">
+                                <button><i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                </button>
+                                <button><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
+                                </button>
+                            </div>
+                            <div class="photoContainer">
+                                <div class="ratingContainer">
+                                    <label for="">RAT</label>
+                                    <p name="rating">78</p>
+                                </div>
+                                <div class="picDiv">
+                                    <img src="src/assets/img/CR7.webp" alt="">
+                                </div>
+                                <div class="infoContainer">
+                                    <h4>simox</h4>
+                                    <div class="numInfos">
+                                        <div>
+                                            <label for="">PAC</label>
+                                            <p name="pace">85</p>
+                                        </div>
+                                        <div>
+                                            <label for="">SHO</label>
+                                            <p name="shooting">94</p>
+                                        </div>
+                                        <div>
+                                            <label for="">PAS</label>
+                                            <p name="passing">63</p>
+                                        </div>
+                                        <div>
+                                            <label for="">DRI</label>
+                                            <p name="dribbling">83</p>
+                                        </div>
+                                        <div>
+                                            <label for="">DEF</label>
+                                            <p name="defending">63</p>
+                                        </div>
+                                        <div>
+                                            <label for="">PHY</label>
+                                            <p name="physical">63</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <img src="src/assets/img/badge_ballon_dor.webp" alt="" id="pofilePhoto">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="changement"></div>
+    </div>
+
+
+
+    <script  type="module" src="index.js"></script>
 </body>
+
 </html>
