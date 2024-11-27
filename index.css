@@ -84,7 +84,7 @@ body{
     width: 100%;
     height: 100%;
     display: flex;
-    background-image: linear-gradient( to top , rgba(1, 3, 28, 0.9), transparent),
+    background-image: linear-gradient( to top , rgb(1, 3, 28), transparent),
                        url(./src/assets/img/stadium_background.webp);;
     background-repeat: no-repeat ;
     background-size: cover ;
@@ -98,6 +98,81 @@ body{
 .squadStadium{
     width: 90%;
     height: 100%;
+    position: relative;
+}
+.card-empty{
+    position: absolute;
+    width: 20%;
+    height: 35%;
+}
+.card-empty img {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0px 0px 3px  white);
+}
+
+.card-empty span {
+    position: absolute;
+    font-size: small;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 7px 10px;
+    border-radius: 50%;
+    background-color:  rgb(5, 0, 20);
+    box-shadow: 0px 0px 3px 0px white;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.STL{
+    /* left: 150px; */
+    left: 20%;
+    top: -6%;
+}
+.STR{
+    right: 20%;
+    top: -6%;
+}
+.LM{
+    left: 4%;
+    top: 27%;
+}
+.CML{
+    left: 27%;
+    top: 35%;
+}
+.CMR{
+    right: 27%;
+    top: 35%;
+}
+.RM{
+    right: 4%;
+    top: 27%;
+}
+.LB{
+    left: 2%;
+    bottom: -2%;
+}
+.CBL{
+    left: 21%;
+    bottom: -6%;
+}
+.GK{
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -20%;
+}
+.CBR{
+    right: 21%;
+    bottom: -6%;
+}
+.RB{
+    right: 2%;
+    bottom: -2%;
 }
 
 
@@ -111,16 +186,23 @@ body{
     overflow: hidden;
 }
 .formContainer{
-    background-color: rgba(62, 61, 61, 0.731);
+    background-color:  rgba(6, 2, 41, 0.452);
     width: 80%;
     height: 85%;
     padding: 10px 20px;
     border-radius: 10px;
 }
-.section1 {
+.error{
+    position: absolute;
+    display: none;
     background-color: red;
+    border-radius: 0px 0px 0px 10px;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 25px;
 }
-.section2{
+.section2 {
     width: 100%;
     height: 100%;
 }
@@ -146,7 +228,50 @@ body{
     flex-direction: column;
 }
 .infoInputs div label{
+    font-family: Arial, Helvetica, sans-serif;
     color: white;
+}
+#photo{
+    width: 42%;
+}
+.photoOutput{
+    position: absolute;
+    right: 20%;
+    top: 20%;
+    width: 15%;
+    height: 100%;
+}
+#photoOutput{
+    width: 100%;
+    height: 100%;
+}
+#flag{
+    width: 42%;
+}
+.flagOutput{
+    position: absolute;
+    right: 20%;
+    top: 20%;
+    width: 15%;
+    height: 100%;
+}
+#flagOutput{
+    width: 100%;
+    height: 100%;
+}
+#logo{
+    width: 42%;
+}
+.LogoOutput{
+    position: absolute;
+    right: 20%;
+    top: 10%;
+    width: 15%;
+    height: 100%;
+}
+#LogoOutput{
+    width: 100%;
+    height: 100%;
 }
 .numInputs{
     width: 100%;
@@ -218,6 +343,7 @@ body{
     position: absolute;
     right: 0;
     height: 90%;
+    width: 2%;
     background-color: rgb(5, 0, 20);
     transition: .5s ease;
 }
@@ -243,12 +369,13 @@ body{
     width: 100%;
     gap: 10px;
     padding: 20px;
+    flex-shrink: 0;
 }
 #pofilePhoto {
     width: 100%;
     height: 100%;
 }
-#cardChangements{
+.cardChangements{
     position: relative;
     display: flex;
     justify-content: center;
@@ -257,6 +384,7 @@ body{
     height: 200px;
     /* background-image:  linear-gradient(red , gray); */
     background-size: cover;
+    flex-shrink: 0;
 }
 .photoContainer{
     position: absolute;
@@ -275,7 +403,7 @@ body{
 .infoContainer{
     position: relative;
     bottom: 8px;
-    background: linear-gradient(to top , black , transparent);
+    background: linear-gradient(to top , rgba(0, 0, 0, 0.742) , rgba(0, 0, 0, 0.189));
 }
 .numInfos{
     display: flex;
@@ -289,7 +417,7 @@ body{
     justify-content: center;
     align-items: center;
 }
-.photoContainer img{
+.picDiv img{
     height: 90%;
     margin-left: 5px;
     width: 90%;
@@ -327,6 +455,12 @@ body{
     font-weight: bold;
     font-size: 10px;
 }
+.ratingContainer p{
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+}
 .editContainer{
     position: absolute;
     right: 8px;  
@@ -347,9 +481,25 @@ body{
     border: none;
     background-color: black;  
 }
+.flagPic{
+    width: 12%;
+    height: 6%;
+    position: absolute;
+    top: 60%;
+    left: 15%;
+    z-index: 99;
+}
+.LogoTeam{
+    width: 14%;
+    height: 10%;
+    position: absolute;
+    top: 58%;
+    right: 13%;
+    z-index: 99;
+}
 
 
-#cardChangements:hover .editContainer{
+.cardChangements:hover .editContainer{
     right: -8px;  
     top: -8px;  
     opacity: 1;
@@ -378,7 +528,7 @@ body{
 
 
 .changement{
-    background-color: black;
+    background-color: rgb(1, 3, 28);
     width: 100%;
     height: 70%;
 }

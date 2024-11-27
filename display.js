@@ -1,12 +1,18 @@
 export function desplayElement(item) {
-    if(item.position === 'GK'){
+    if (item.position === 'GK') {
         return `
-    <div id="cardChangements">
+    <div class="cardChangements">
         <div class="editContainer">
                <button><i class="fa-solid fa-trash" style="color: #ffffff;"></i>
             </button>
              <button><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
             </button>
+        </div>
+        <div class="flag">
+            <img src="${item.flag}" alt="" class="flagPic">
+        </div>
+        <div>
+            <img src="${item.logo}" alt="" class="LogoTeam">
         </div>
         <div class="photoContainer">
             <div class="ratingContainer">
@@ -46,18 +52,24 @@ export function desplayElement(item) {
                 </div>
             </div>
         </div>
-        <img src="src/assets/img/badge_gold.webp" alt="" id="pofilePhoto">
+        <img src="src/assets/img/badge_total_rush.webp" alt="" id="pofilePhoto">
     </div>
 
     `
-    }else{
-      return `
-    <div id="cardChangements">
+    } else {
+        return `
+    <div class="cardChangements">
         <div class="editContainer">
                <button><i class="fa-solid fa-trash" style="color: #ffffff;"></i>
             </button>
              <button><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
             </button>
+        </div>
+        <div class="flag">
+            <img src="${item.flag}" alt="" class="flagPic">
+        </div>
+        <div>
+            <img src="${item.logo}" alt="" class="LogoTeam">
         </div>
         <div class="photoContainer">
             <div class="ratingContainer">
@@ -102,5 +114,5 @@ export function desplayElement(item) {
 
     `
     }
-    
+
 }

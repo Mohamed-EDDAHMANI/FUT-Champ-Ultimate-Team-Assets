@@ -1,6 +1,6 @@
 export function inputValidat(data) {
     if (data.id === 'name' || data.id === 'nationality' || data.id === 'club') {
-        const regex = /^[A-Za-z]{1,15}$/;
+        const regex = /^[A-Za-z\s]{1,15}$/;
         return !regex.test(data.value);
     }
     
@@ -16,7 +16,6 @@ export function inputValidat(data) {
     }
 
     if (Array.isArray(data)) {
-        console.log('fileside')
         for (let i = 0; i < data.length; i++) {
             if (data[i].files.length !== 0) {
                 return false; 

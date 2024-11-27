@@ -41,13 +41,60 @@
                         <path d="M675.597 492.572H227.26L211.911 649.198H690.84L675.597 492.572Z" fill="#404040" stroke="#696969" stroke-miterlimit="10"/>
                         <path d="M556.362 556.642H352.353L348.43 649.238H560.453L556.362 556.642Z" stroke="#696969" stroke-miterlimit="10"/>
                     </svg>
+                    <div class="card-empty STL">
+                        <img src="/src/assets/img/Card-empty.png" alt="">
+                        <span>ST</span>
+                    </div>
+                    <div class="card-empty STR">
+                        <img src="/src/assets/img/Card-empty.png" alt="">
+                        <span>ST</span>
+                    </div>
+                    <div class="card-empty LM">
+                        <img src="/src/assets/img/Card-empty.png" alt="">
+                        <span>LM</span>
+                    </div>
+                    <div class="card-empty CML">
+                        <img src="/src/assets/img/Card-empty.png" alt="">
+                        <span>CM</span>
+                    </div>
+                    <div class="card-empty CMR">
+                        <img src="/src/assets/img/Card-empty.png" alt="">
+                        <span>CM</span>
+                    </div>
+                    <div class="card-empty RM">
+                        <img src="/src/assets/img/Card-empty.png" alt="">
+                        <span>RM</span>
+                    </div>
+                    <div class="card-empty LB">
+                        <img src="/src/assets/img/Card-empty.png" alt="">
+                        <span>LB</span>
+                    </div>
+                    <div class="card-empty CBL">
+                        <img src="/src/assets/img/Card-empty.png" alt="">
+                        <span>CB</span>
+                    </div>
+                    <div class="card-empty GK">
+                        <img src="/src/assets/img/Card-empty.png" alt="">
+                        <span>GK</span>
+                    </div>
+                    <div class="card-empty CBR">
+                        <img src="/src/assets/img/Card-empty.png" alt="">
+                        <span>CR</span>
+                    </div>
+                    <div class="card-empty RB">
+                        <img src="/src/assets/img/Card-empty.png" alt="">
+                        <span>RB</span>
+                    </div>
                 </div>
 
             </div>
             <div class="formuler">
-                <div class="formContainer">
+                <div class="formContainer" style="position: relative;">
                     <div>
-                        <h3>Add player</h3>
+                        <h3 style="color: white; font-family: Arial, Helvetica, sans-serif; padding: 3px ;">Add player</h3>
+                    </div>
+                    <div class="error" style="display: none; justify-content: center; align-items: center; ">
+                        <span class="errorSpan" style="color: white;"></span>
 
                     </div>
 
@@ -66,9 +113,12 @@
                                     <label for="">Name</label>
                                     <input type="text" id="name" name="name">
                                 </div>
-                                <div>
-                                    <label for="">Photo</label>
+                                <div style="position: relative;">
+                                    <label for="photo">Photo</label>
                                     <input type="file" id="photo" accept="image/*" name="photo">
+                                    <div class="photoOutput">
+                                        <img src="" alt="" id="photoOutput">
+                                    </div>
                                 </div>
                                 <div>
                                     <label for="">Position</label>
@@ -87,17 +137,23 @@
                                     <label for="">Nationality</label>
                                     <input type="text" id="nationality" name="nationality">
                                 </div>
-                                <div>
-                                    <label for="">Flag</label>
+                                <div style="position: relative;">
+                                    <label for="" >Flag</label>
                                     <input type="file" id="flag" accept="image/*" name="flag">
+                                    <div class="flagOutput">
+                                        <img src="" alt="" id="flagOutput">
+                                    </div>
                                 </div>
                                 <div>
                                     <label for="">Club</label>
                                     <input type="text" id="club" name="club">
                                 </div>
-                                <div>
-                                    <label for="">Logo</label>
+                                <div style="position: relative;">
+                                    <label for="" style="position: relative;">Logo</label>
                                     <input type="file" id="logo" accept="image/*" name="logo">
+                                    <div class="LogoOutput">
+                                        <img src="" alt="" id="LogoOutput">
+                                    </div>
                                 </div>
                             </div>
                             <div class="numInputs" id="numInputs">
@@ -171,12 +227,18 @@
                         <i class="fa-solid fa-futbol" id="redouBtn" style="color: #ffffff;"></i>
                     </div>
                     <div id="cardsChangementsContainer">
-                        <div id="cardChangements">
+                        <div class="cardChangements">
                             <div class="editContainer">
                                 <button><i class="fa-solid fa-trash" style="color: #ffffff;"></i>
                                 </button>
                                 <button><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
                                 </button>
+                            </div>
+                            <div class="flag">
+                                <img src="src/assets/img/footLogo.jpg" alt="" class="flagPic">
+                            </div>
+                            <div>
+                                <img src="src/assets/img/footLogo.jpg" alt="" class="LogoTeam">
                             </div>
                             <div class="photoContainer">
                                 <div class="ratingContainer">
