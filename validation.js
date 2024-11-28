@@ -15,9 +15,20 @@ export function inputValidat(data) {
         return false; 
     }
 
+    if (data.id === 'numInputsGK') {
+        const inputs = data.querySelectorAll('input[type="number"]');
+        for (const input of inputs) {
+            const numValue = input.value;
+            if (numValue === '' || numValue <= 0 || numValue >= 100) {
+                return true;
+            }
+        }
+        return false; 
+    }
+
     if (Array.isArray(data)) {
         for (let i = 0; i < data.length; i++) {
-            if (data[i].files.length !== 0) {
+            if (data[i].value.length !== 0 ) {
                 return false; 
             }
         }

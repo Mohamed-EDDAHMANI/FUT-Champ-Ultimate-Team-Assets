@@ -1,64 +1,66 @@
-import { desplayElement } from './display.js'
+import { desplayElement, displayCartToStuduem } from './display.js'
 import { inputValidat } from './validation.js'
+import { uploadToImgBB } from './convertIMG.js'
 
 const positionSelect = document.getElementById('positionSelect')
-const numInputsGK = document.getElementById('numInputsGK')
+const numInputsGK = document.getElementsByClassName('GKinputs')[0]
+const num = document.getElementsByClassName('num')
+const numPlayer = document.getElementsByClassName('numPlayer')
 const formData = document.getElementById('formData')
+const numInputs = document.getElementById('numInputs')
+const InputGK = document.getElementById('numInputsGK')
+const cardsChangementsContainer = document.getElementById('cardsChangementsContainer')
+const rbCard = await document.querySelector('.card-empty.GK');
+const playerContainerGK = await rbCard.querySelector('.PlayerContainerCard');
 
+//localStorage Data
+const data = JSON.parse(localStorage.getItem('players'))
+const GKPlayers = JSON.parse(localStorage.getItem('GKPlayers'))
 
 
 async function getPlayers() {
     try {
         const response = await fetch('./players.json');
         const data = await response.json();
-        localStorage.setItem('players', JSON.stringify(data.players))
+        localStorage.setItem('players', JSON.stringify(data))
         return data;
     } catch (error) {
         console.error('Error fetching players:', error);
     }
-
 }
-
-async function displayCards() {
-    const cardsChangementsContainer = document.getElementById('cardsChangementsContainer')
-    const data = JSON.parse(localStorage.getItem('players'))
-    data.forEach(item => {
+async function displayCards(data) {
+    data?.players.forEach(item => {
         cardsChangementsContainer.innerHTML += desplayElement(item)
     });
-
-
 }
 
-document.getElementById('photo').addEventListener('change', (event) => {
+document.getElementById('photo').addEventListener('change', () => {
     const photoOutput = document.getElementById('photoOutput');
-    photoOutput.src = URL.createObjectURL(event.target.files[0]);
+    photoOutput.src = document.getElementById('photo').value;
 })
-document.getElementById('flag').addEventListener('change', (event) => {
+document.getElementById('flag').addEventListener('change', () => {
     const flagOutput = document.getElementById('flagOutput');
-    flagOutput.src = URL.createObjectURL(event.target.files[0]);
-
+    flagOutput.src = document.getElementById('flag').value;
 })
-document.getElementById('logo').addEventListener('change', (event) => {
+document.getElementById('logo').addEventListener('change', () => {
     const LogoOutput = document.getElementById('LogoOutput');
-    LogoOutput.src = URL.createObjectURL(event.target.files[0]);
-
+    LogoOutput.src = document.getElementById('logo').value;
 })
 
 
-formData.addEventListener('submit', function (event) {
+formData.addEventListener('submit', async function (event) {
     event.preventDefault();
 
     const name = document.getElementById('name');
     const nationality = document.getElementById('nationality');
     const club = document.getElementById('club');
-    const numInputs = document.getElementById('numInputs')
 
-    const fileInputs = [
+    const URLInputs = [
         document.getElementById('photo'),
         document.getElementById('flag'),
         document.getElementById('logo')
     ];
-    
+
     if (inputValidat(name)) {
         name.style.border = ' solid red 1px'
         document.getElementsByClassName('error')[0].style.display = 'flex'
@@ -67,7 +69,7 @@ formData.addEventListener('submit', function (event) {
             name.style.border = ' none'
             document.getElementsByClassName('error')[0].style.display = 'none'
         }, 2000);
-    } else if (inputValidat(fileInputs)) {
+    } else if (inputValidat(URLInputs)) {
         document.getElementsByClassName('error')[0].style.display = 'flex'
         document.getElementsByClassName('errorSpan')[0].textContent = 'Invalide file'
         setTimeout(() => {
@@ -90,8 +92,15 @@ formData.addEventListener('submit', function (event) {
             document.getElementsByClassName('error')[0].style.display = 'none'
         }, 2000);
     }
-
-    if (inputValidat(name) || inputValidat(nationality) || inputValidat(club) || inputValidat(numInputs) || inputValidat(fileInputs)) {
+    else if (inputValidat(positionSelect.value === 'GK' ? InputGK : numInputs)) {
+        document.getElementsByClassName('error')[0].style.display = 'flex'
+        document.getElementsByClassName('errorSpan')[0].textContent = 'Invalide Numbers must be < 0 et > 100'
+        setTimeout(() => {
+            club.style.border = 'none'
+            document.getElementsByClassName('error')[0].style.display = 'none'
+        }, 2000);
+    }
+    if (inputValidat(name) || inputValidat(nationality) || inputValidat(club) || inputValidat(positionSelect.value === 'GK' ? InputGK : numInputs) || inputValidat(URLInputs)) {
         console.error('invalide Values')
 
     } else {
@@ -99,13 +108,13 @@ formData.addEventListener('submit', function (event) {
         if (positionSelect.value === 'GK') {
             const data = {
                 name: name.value,
-                photo: document.getElementById('photo').files[0],
+                photo: document.getElementById('photo').value,
                 position: "GK",
                 nationality: nationality.value,
-                flag: document.getElementById('flag').files[0],
+                flag: document.getElementById('flag').value,
                 club: club.value,
-                logo: document.getElementById('logo').files[0],
-                rating: document.querySelector('input[name="rating"]').value,
+                logo: document.getElementById('logo').value,
+                rating: document.querySelector('input[id="rating1"]').value,
                 diving: document.querySelector('input[name="diving"]').value,
                 handling: document.querySelector('input[name="handling"]').value,
                 kicking: document.querySelector('input[name="kicking"]').value,
@@ -113,18 +122,21 @@ formData.addEventListener('submit', function (event) {
                 speed: document.querySelector('input[name="speed"]').value,
                 positioning: document.querySelector('input[name="positioning"]').value
             }
-            players.push(data)
-            console.log(players)
+            await displayCartToStuduem(data)
+            if (!players.players.includes(data)) {
+                players.players.push(data)
+            }
+            await localStorage.setItem('players', JSON.stringify(players))
         } else {
             const data = {
                 name: name.value,
-                photo: document.getElementById('photo').files[0],
+                photo: document.getElementById('photo').value,
                 position: positionSelect.value,
                 nationality: nationality.value,
-                flag: document.getElementById('flag').files[0],
+                flag: document.getElementById('flag').value,
                 club: club.value,
-                logo: document.getElementById('logo').files[0],
-                rating: document.querySelector('input[name="rating"]').value,
+                logo: document.getElementById('logo').value,
+                rating: document.querySelector('input[id="rating2"]').value,
                 pace: document.querySelector('input[name="pace"]').value,
                 shooting: document.querySelector('input[name="shooting"]').value,
                 passing: document.querySelector('input[name="passing"]').value,
@@ -132,8 +144,11 @@ formData.addEventListener('submit', function (event) {
                 defending: document.querySelector('input[name="defending"]').value,
                 physical: document.querySelector('input[name="physical"]').value
             }
-            players.push(data)
-            console.log(players)
+            await displayCartToStuduem(data)
+            if (!players.players.includes(data)) {
+                players.players.push(data)
+            }
+            await localStorage.setItem('players', JSON.stringify(players))
         }
     }
 });
@@ -147,22 +162,28 @@ document.getElementById('redouBtn').addEventListener('click', () => {
 });
 
 
-
+// localStorage.clear()
 positionSelect.addEventListener('change', () => {
     if (positionSelect.value === 'GK') {
         numInputsGK.style.display = 'flex'
         numInputs.style.display = 'none'
-
+        const nums = [...num];
+        nums.forEach(item => {
+            item.display = 'none'
+        });
     } else {
         numInputsGK.style.display = 'none'
         numInputs.style.display = 'flex'
+        const nums = [...num];
+        nums.forEach(item => {
+            item.display = 'flex'
+        });
 
     }
 })
 
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    displayCards()
-    getPlayers()
+document.addEventListener('DOMContentLoaded', async () => {
+    await GKPlayers !== null ? displayCartToStuduem(GKPlayers) : '' ;
+    await data === null ? getPlayers() : displayCards(data);
+    displayCards(playerContainerGK, GKPlayers)
 })

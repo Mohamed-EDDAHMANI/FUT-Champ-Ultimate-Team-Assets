@@ -14,7 +14,7 @@ body{
 }
 /* header */
 .header{
-    background-color:  rgb(5, 0, 20);
+    background-color:  rgba(5, 0, 20, 0.521);
     width: 100%;
     padding: 15px;
     position: fixed;
@@ -101,6 +101,7 @@ body{
     position: relative;
 }
 .card-empty{
+    z-index: 10;
     position: absolute;
     width: 20%;
     height: 35%;
@@ -112,6 +113,7 @@ body{
 }
 
 .card-empty span {
+    z-index: 999;
     position: absolute;
     font-size: small;
     bottom: 0;
@@ -127,6 +129,7 @@ body{
     align-items: center;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
 }
 .STL{
     /* left: 150px; */
@@ -164,7 +167,7 @@ body{
 .GK{
     left: 50%;
     transform: translateX(-50%);
-    bottom: -20%;
+    bottom: -16%;
 }
 .CBR{
     right: 21%;
@@ -173,6 +176,15 @@ body{
 .RB{
     right: 2%;
     bottom: -2%;
+}
+
+.PlayerContainerCard{
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -275,9 +287,7 @@ body{
 }
 .numInputs{
     width: 100%;
-    /* background-color: red; */
     height: 30%;
-    /* background-color: black; */
     display: flex;
     justify-content: center;
     align-items: start;
@@ -289,7 +299,6 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* background-color: red; */
     width: 25%;
 }
 .numInputs div label{
@@ -298,11 +307,9 @@ body{
 .numInputs div input{
     width: 40%;
 }
-#numInputsGK{
+.GKinputs{
     width: 100%;
-    /* background-color: red; */
     height: 30%;
-    /* background-color: black; */
     display: none;
     justify-content: center;
     align-items: start;
@@ -310,16 +317,16 @@ body{
     flex-wrap: wrap;
     position: relative;
 }
-#numInputsGK div {
+.GKinputs div {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 25%;
 }
-#numInputsGK div label{
+.GKinputs div label{
     color: white;
 }
-#numInputsGK div input{
+.GKinputs div input{
     width: 40%;
 }
 .createBtn{
@@ -374,19 +381,26 @@ body{
 #pofilePhoto {
     width: 100%;
     height: 100%;
+    transition: ease .2s;
+}
+.cardChangements:hover #pofilePhoto{
+    filter: drop-shadow(0px 0px 10px  rgb(7, 15, 239));
 }
 .cardChangements{
+    transform: translateY(-25px);
+    z-index: 500;
     position: relative;
     display: flex;
     justify-content: center;
     align-items:center ;
     width: 150px;
     height: 200px;
-    /* background-image:  linear-gradient(red , gray); */
     background-size: cover;
     flex-shrink: 0;
+    margin: 0;
 }
 .photoContainer{
+    z-index: 50;
     position: absolute;
     height: 90%;
     width: 70%;
@@ -401,17 +415,18 @@ body{
     height: 50%;
 }
 .infoContainer{
+    z-index: 200;
     position: relative;
     bottom: 8px;
     background: linear-gradient(to top , rgba(0, 0, 0, 0.742) , rgba(0, 0, 0, 0.189));
 }
 .numInfos{
+    z-index: 99999;
     display: flex;
     gap: 3px;
     justify-content: center;
 }
 .photoContainer {
-    /* background-color: red; */
     padding: 10px 0px;
     display: flex;
     justify-content: center;
@@ -429,8 +444,8 @@ body{
     align-items: center;
 }
 .infoContainer h4{
+    z-index: 1000;
     height: 40px;
-    overflow: hidden; 
     text-align: center;
     color: white;
 }
@@ -441,6 +456,7 @@ body{
     font-size: 7px;
 }
 .ratingContainer{
+    z-index: 400;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -450,6 +466,7 @@ body{
 }
 
 .ratingContainer label, p{
+    z-index: 800;
     color: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -482,16 +499,18 @@ body{
     background-color: black;  
 }
 .flagPic{
-    width: 12%;
-    height: 6%;
+    z-index: 300;
+    width: 12% !important;
+    height: 6% !important;
     position: absolute;
     top: 60%;
     left: 15%;
     z-index: 99;
 }
 .LogoTeam{
-    width: 14%;
-    height: 10%;
+    z-index: 900;
+    width: 14% !important;
+    height: 10% !important;
     position: absolute;
     top: 58%;
     right: 13%;

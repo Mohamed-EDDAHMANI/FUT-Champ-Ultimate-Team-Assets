@@ -44,46 +44,79 @@
                     <div class="card-empty STL">
                         <img src="/src/assets/img/Card-empty.png" alt="">
                         <span>ST</span>
+                        <div class="PlayerContainerCard">
+
+                        </div>
                     </div>
                     <div class="card-empty STR">
                         <img src="/src/assets/img/Card-empty.png" alt="">
                         <span>ST</span>
+                        <div class="PlayerContainerCard">
+
+                        </div>
                     </div>
                     <div class="card-empty LM">
                         <img src="/src/assets/img/Card-empty.png" alt="">
                         <span>LM</span>
+                        <div class="PlayerContainerCard">
+
+                        </div>
                     </div>
                     <div class="card-empty CML">
                         <img src="/src/assets/img/Card-empty.png" alt="">
                         <span>CM</span>
+                        <div class="PlayerContainerCard">
+
+                        </div>
                     </div>
                     <div class="card-empty CMR">
                         <img src="/src/assets/img/Card-empty.png" alt="">
                         <span>CM</span>
+                        <div class="PlayerContainerCard">
+
+                        </div>
                     </div>
                     <div class="card-empty RM">
                         <img src="/src/assets/img/Card-empty.png" alt="">
                         <span>RM</span>
+                        <div class="PlayerContainerCard">
+
+                        </div>
                     </div>
                     <div class="card-empty LB">
                         <img src="/src/assets/img/Card-empty.png" alt="">
                         <span>LB</span>
+                        <div class="PlayerContainerCard">
+
+                        </div>
                     </div>
                     <div class="card-empty CBL">
                         <img src="/src/assets/img/Card-empty.png" alt="">
                         <span>CB</span>
+                        <div class="PlayerContainerCard">
+
+                        </div>
                     </div>
                     <div class="card-empty GK">
-                        <img src="/src/assets/img/Card-empty.png" alt="">
+                        <img src="/src/assets/img/Card-empty.png" alt="" class="studiamImage">
                         <span>GK</span>
+                        <div class="PlayerContainerCard">
+
+                        </div>
                     </div>
                     <div class="card-empty CBR">
                         <img src="/src/assets/img/Card-empty.png" alt="">
-                        <span>CR</span>
+                        <span>CB</span>
+                        <div class="PlayerContainerCard">
+
+                        </div>
                     </div>
                     <div class="card-empty RB">
                         <img src="/src/assets/img/Card-empty.png" alt="">
                         <span>RB</span>
+                        <div class="PlayerContainerCard">
+
+                        </div>
                     </div>
                 </div>
 
@@ -115,7 +148,7 @@
                                 </div>
                                 <div style="position: relative;">
                                     <label for="photo">Photo</label>
-                                    <input type="file" id="photo" accept="image/*" name="photo">
+                                    <input type="text" id="photo" name="photo">
                                     <div class="photoOutput">
                                         <img src="" alt="" id="photoOutput">
                                     </div>
@@ -124,8 +157,8 @@
                                     <label for="">Position</label>
                                     <select name="" id="positionSelect">
                                         <option value="ST">ST</option>
-                                        <option value="LW">LW</option>
-                                        <option value="RW">RW</option>
+                                        <option value="LM">LM</option>
+                                        <option value="RM">RM</option>
                                         <option value="CM">CM</option>
                                         <option value="LB">LB</option>
                                         <option value="CB">CB</option>
@@ -139,7 +172,7 @@
                                 </div>
                                 <div style="position: relative;">
                                     <label for="" >Flag</label>
-                                    <input type="file" id="flag" accept="image/*" name="flag">
+                                    <input type="text" id="flag"  name="flag">
                                     <div class="flagOutput">
                                         <img src="" alt="" id="flagOutput">
                                     </div>
@@ -150,7 +183,7 @@
                                 </div>
                                 <div style="position: relative;">
                                     <label for="" style="position: relative;">Logo</label>
-                                    <input type="file" id="logo" accept="image/*" name="logo">
+                                    <input type="text" id="logo"  name="logo">
                                     <div class="LogoOutput">
                                         <img src="" alt="" id="LogoOutput">
                                     </div>
@@ -159,62 +192,62 @@
                             <div class="numInputs" id="numInputs">
                                 <div class="div">
                                     <label for="">RAT</label>
-                                    <input type="number" name="rating">
+                                    <input class="num" type="number" name="rating" id="rating2">
                                 </div>
                                 <div class="div">
                                     <label for="">PAC</label>
-                                    <input type="number" name="pace">
+                                    <input class="num" type="number" name="pace">
                                 </div>
                                 <div class="div">
                                     <label for="">SHO</label>
-                                    <input type="number" name="shooting">
+                                    <input class="num" type="number" name="shooting">
                                 </div>
                                 <div class="div">
                                     <label for="">PAS</label>
-                                    <input type="number" name="passing">
+                                    <input class="num" type="number" name="passing">
                                 </div>
                                 <div class="div">
                                     <label for="">DRI</label>
-                                    <input type="number" name="dribbling">
+                                    <input class="num" type="number" name="dribbling">
                                 </div>
                                 <div class="div">
                                     <label for="">DEF</label>
-                                    <input type="number" name="defending">
+                                    <input class="num" type="number" name="defending">
                                 </div>
                                 <div class="div">
                                     <label for="">PHY</label>
-                                    <input type="number" name="physical">
+                                    <input class="num" type="number" name="physical">
                                 </div>
                                 <button type="submit" class="createBtn">Submit</button>
                             </div>
-                            <div id="numInputsGK">
+                            <div class="numInputs GKinputs" id="numInputsGK">
                                 <div>
                                     <label for="">RAT</label>
-                                    <input type="number" name="rating">
+                                    <input class="numPlayer" type="number" name="rating" id="rating1">
                                 </div>
                                 <div>
                                     <label for="">DIV</label>
-                                    <input type="number" name="diving">
+                                    <input class="numPlayer" type="number" name="diving">
                                 </div>
                                 <div>
                                     <label for="">HAN</label>
-                                    <input type="number" name="handling">
+                                    <input class="numPlayer" type="number" name="handling">
                                 </div>
                                 <div>
                                     <label for="">KIC</label>
-                                    <input type="number" name="kicking">
+                                    <input class="numPlayer" type="number" name="kicking">
                                 </div>
                                 <div>
                                     <label for="">REF</label>
-                                    <input type="number" name="reflexes">
+                                    <input class="numPlayer" type="number" name="reflexes">
                                 </div>
                                 <div>
                                     <label for="">SPD</label>
-                                    <input type="number" name="speed">
+                                    <input class="numPlayer" type="number" name="speed">
                                 </div>
                                 <div>
                                     <label for="">POS</label>
-                                    <input type="number" name="positioning">
+                                    <input class="numPlayer" type="number" name="positioning">
                                 </div>
                                 <button type="submit" class="createBtn">Submit</button>
                             </div>
