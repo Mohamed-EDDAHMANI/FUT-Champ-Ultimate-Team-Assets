@@ -110,6 +110,7 @@ body{
     width: 100%;
     height: 100%;
     filter: drop-shadow(0px 0px 3px  white);
+    /* border: solid red 2px; */
 }
 
 .card-empty span {
@@ -499,7 +500,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .editContainer button{
     width: 25px;
     height: 25px;
-    box-shadow: inset 0px 3px 10px white;
+    box-shadow: inset 0px 3px 10px gold;
     border-radius: 50px;
     border: none;
     background-color: black;  
@@ -554,4 +555,33 @@ input[type="number"]::-webkit-outer-spin-button {
     filter: drop-shadow(0px 0px 3px  white);
     width: 100%;
     height: 100%;
+}
+
+
+
+/* for js drag and drop */
+
+.isdragin{
+    filter: drop-shadow(0px 0px 3px  green) !important;
+    opacity: 1;
+    border: solid 2px green;
+}
+
+.boxdragin{
+    filter: drop-shadow(0px 0px 3px  green) !important;
+    opacity: 1;
+    border: solid 2px blue !important;
+}
+
+
+.redbox{
+    filter: drop-shadow(0px 0px 3px  green) !important;
+    opacity: 1;
+    border: solid 2px red;
+}
+
+.changmentDraged{
+    filter: drop-shadow(0px 0px 7px  white) !important;
+    border: solid 2px red;
+    opacity: 1;
 }

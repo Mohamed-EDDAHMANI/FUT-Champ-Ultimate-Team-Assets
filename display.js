@@ -1,304 +1,273 @@
-const changement = await document.querySelector('.changement');
-const rbCard = await document.querySelector('.card-empty.GK');
-const CbCardL = await document.querySelector('.card-empty.CBL');
-const CbCardR = await document.querySelector('.card-empty.CBR');
-const LBcontainer = await document.querySelector('.card-empty.LB');
-const RBcontainer = await document.querySelector('.card-empty.RB');
-const LMcontainer = await document.querySelector('.card-empty.LM');
-const RMcontainer = await document.querySelector('.card-empty.RM');
-const CMCardL = await document.querySelector('.card-empty.CML');
-const CMCardR = await document.querySelector('.card-empty.CMR');
-const STCardL = await document.querySelector('.card-empty.STL');
-const STCardR = await document.querySelector('.card-empty.STR');
+import { createObject, addToLocalStorage } from './validation.js'
 
-const playerContainerGK = await rbCard.querySelector('.PlayerContainerCard');
-const playerContainerCbL = await CbCardL.querySelector('.PlayerContainerCard');
-const playerContainerCbR = await CbCardR.querySelector('.PlayerContainerCard');
-const LB = await LBcontainer.querySelector('.PlayerContainerCard');
-const RB = await RBcontainer.querySelector('.PlayerContainerCard');
-const LM = await LMcontainer.querySelector('.PlayerContainerCard');
-const RM = await RMcontainer.querySelector('.PlayerContainerCard');
-const playerContainerCML = await CMCardL.querySelector('.PlayerContainerCard');
-const playerContainerCMR = await CMCardR.querySelector('.PlayerContainerCard');
-const playerContainerSTL = await STCardL.querySelector('.PlayerContainerCard');
-const playerContainerSTR = await STCardR.querySelector('.PlayerContainerCard');
+const rbCard = document.querySelector('.card-empty.GK');
+const CbCardL = document.querySelector('.card-empty.CBL');
+const CbCardR = document.querySelector('.card-empty.CBR');
+const LBcontainer = document.querySelector('.card-empty.LB');
+const RBcontainer = document.querySelector('.card-empty.RB');
+const LMcontainer = document.querySelector('.card-empty.LM');
+const RMcontainer = document.querySelector('.card-empty.RM');
+const CMCardL = document.querySelector('.card-empty.CML');
+const CMCardR = document.querySelector('.card-empty.CMR');
+const STCardL = document.querySelector('.card-empty.STL');
+const STCardR = document.querySelector('.card-empty.STR');
+
+const playerContainerGK = rbCard.querySelector('.PlayerContainerCard');
+const playerContainerCbL = CbCardL.querySelector('.PlayerContainerCard');
+const playerContainerCbR = CbCardR.querySelector('.PlayerContainerCard');
+const LB = LBcontainer.querySelector('.PlayerContainerCard');
+const RB = RBcontainer.querySelector('.PlayerContainerCard');
+const LM = LMcontainer.querySelector('.PlayerContainerCard');
+const RM = RMcontainer.querySelector('.PlayerContainerCard');
+const playerContainerCML = CMCardL.querySelector('.PlayerContainerCard');
+const playerContainerCMR = CMCardR.querySelector('.PlayerContainerCard');
+const playerContainerSTL = STCardL.querySelector('.PlayerContainerCard');
+const playerContainerSTR = STCardR.querySelector('.PlayerContainerCard');
 
 const playerContainers = document.querySelectorAll('.PlayerContainerCard-changement');
+let changementPlayers = JSON.parse(localStorage.getItem('changementPlayers')) || { Players: [] };
 
+export function displayElement(item) {
+    const isGoalkeeper = item?.position === 'GK';
 
-//localStorage Data
-const GKPlayers = JSON.parse(localStorage.getItem('GKPlayers')) || { GKPlayers: [] };
-const changementPlayers = JSON.parse(localStorage.getItem('changementPlayers')) || { Players: [] };
-const CBLPlayers = JSON.parse(localStorage.getItem('CBPlayers')) || { CBLPlayers: [] };
-const CBRPlayers = JSON.parse(localStorage.getItem('CBRPlayers')) || { CBRPlayers: [] };
-const LBPlayers = JSON.parse(localStorage.getItem('LBPlayers')) || { LBPlayers: [] };
-const RBPlayers = JSON.parse(localStorage.getItem('RBPlayers')) || { RBPlayers: [] };
-const LMPlayers = JSON.parse(localStorage.getItem('LMPlayers')) || { LMPlayers: [] };
-const RMPlayers = JSON.parse(localStorage.getItem('RMPlayers')) || { RMPlayers: [] };
-const CMLPlayers = JSON.parse(localStorage.getItem('CMLPlayers')) || { CMLPlayers: [] };
-const CMRPlayers = JSON.parse(localStorage.getItem('CMRPlayers')) || { CMRPlayers: [] };
-const STLPlayers = JSON.parse(localStorage.getItem('STLPlayers')) || { STLPlayers: [] };
-const STRPlayers = JSON.parse(localStorage.getItem('STRPlayers')) || { STRPlayers: [] };
-
-
-export function desplayElement(item) {
-    if (item?.position === 'GK') {
-        return `
-    <div class="cardChangements">
-        <div class="editContainer">
-               <button><i class="fa-solid fa-trash" style="color: #ffffff;"></i>
-            </button>
-             <button><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
-            </button>
-        </div>
-        <div class="flag">
-            <img src="${item.flag}" alt="" class="flagPic">
-        </div>
-        <div>
-            <img src="${item.logo}" alt="" class="LogoTeam">
-        </div>
-        <div class="photoContainer">
-            <div class="ratingContainer">
-                <label for="">RAT</label>
-                <p name="rating">${item.rating}</p>
+    const stats = isGoalkeeper
+        ? `
+            <div>
+                <label for="">DIV</label>
+                <p name="diving">${item.diving}</p>
             </div>
-            <div class="picDiv">
-                <img src="${item.photo}" alt="">
+            <div>
+                <label for="">HAN</label>
+                <p name="handling">${item.handling}</p>
             </div>
-            <div class="infoContainer">
-                <h4>${item.name}</h4>
-                <div class="numInfos">
-                    <div>
-                         <label for="">DIV</label>
-                        <p name="diving">${item.diving}</p>
-                    </div>
-                    <div>
-                        <label for="">HAN</label>
-                         <p name="handling">${item.handling}</p>
-                    </div>
-                    <div>
-                        <label for="">KIC</label>
-                        <p name="kicking">${item.kicking}</p>
-                    </div>
-                    <div>
-                        <label for="">REF</label>
-                        <p name="reflexes">${item.reflexes}</p>
-                    </div>
-                    <div>
-                           <label for="">SPE</label>
-                        <p name="speed">${item.speed}</p>
-                    </div>
-                    <div>
-                        <label for="">POS</label>
-                        <p name="positioning">${item.positioning}</p>
+            <div>
+                <label for="">KIC</label>
+                <p name="kicking">${item.kicking}</p>
+            </div>
+            <div>
+                <label for="">REF</label>
+                <p name="reflexes">${item.reflexes}</p>
+            </div>
+            <div>
+                <label for="">SPE</label>
+                <p name="speed">${item.speed}</p>
+            </div>
+            <div>
+                <label for="">POS</label>
+                <p name="positioning">${item.positioning}</p>
+            </div>
+        `
+        : `
+            <div class="paceContainer">
+                <label for="">PAC</label>
+                <p name="pace">${item?.pace}</p>
+            </div>
+            <div>
+                <label for="">SHO</label>
+                <p name="shooting">${item?.shooting}</p>
+            </div>
+            <div>
+                <label for="">PAS</label>
+                <p name="passing">${item?.passing}</p>
+            </div>
+            <div>
+                <label for="">DRI</label>
+                <p name="dribbling">${item?.dribbling}</p>
+            </div>
+            <div>
+                <label for="">DEF</label>
+                <p name="defending">${item?.defending}</p>
+            </div>
+            <div class="physicalContainer">
+                <label for="">PHY</label>
+                <p name="physical">${item?.physical}</p>
+            </div>
+        `;
+
+    const badge = isGoalkeeper
+        ? "src/assets/img/badge_total_rush.webp"
+        : "src/assets/img/badge_ballon_dor.webp";
+
+    return `
+        <div class="cardChangements" draggable="true" data-position="${item?.position}">
+            <div class="editContainer">
+                <button><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
+                <button><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></button>
+            </div>
+            <div class="flag">
+                <img src="${item?.flag}" alt="flagPic" class="flagPic" draggable="false">
+            </div>
+            <div class="logoitem">
+                <img src="${item?.logo}" alt="LogoTeam" class="LogoTeam" draggable="false">
+            </div>
+            <div class="photoContainer">
+                <div class="ratingContainer">
+                    <label for="">RAT</label>
+                    <p name="rating">${item?.rating}</p>
+                </div>
+                <div class="picDiv">
+                    <img src="${item?.photo}" alt="" draggable="false">
+                </div>
+                <div class="infoContainer">
+                    <h4>${item?.name}</h4>
+                    <div class="numInfos">
+                        ${stats}
                     </div>
                 </div>
             </div>
+            <img src="${badge}" alt="" id="pofilePhoto" draggable="false">
         </div>
-        <img src="src/assets/img/badge_total_rush.webp" alt="" id="pofilePhoto">
-    </div>
-
-    `
-    } else {
-        return `
-    <div class="cardChangements">
-        <div class="editContainer">
-               <button><i class="fa-solid fa-trash" style="color: #ffffff;"></i>
-            </button>
-             <button><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
-            </button>
-        </div>
-        <div class="flag">
-            <img src="${item?.flag}" alt="" class="flagPic">
-        </div>
-        <div>
-            <img src="${item?.logo}" alt="" class="LogoTeam">
-        </div>
-        <div class="photoContainer">
-            <div class="ratingContainer">
-                <label for="">RAT</label>
-                <p name="rating">${item?.rating}</p>
-            </div>
-            <div class="picDiv">
-                <img src="${item?.photo}" alt="">
-            </div>
-            <div class="infoContainer">
-                <h4>${item?.name}</h4>
-                <div class="numInfos">
-                    <div>
-                         <label for="">PAC</label>
-                        <p name="pace">${item?.pace}</p>
-                    </div>
-                    <div>
-                        <label for="">SHO</label>
-                         <p name="shooting">${item?.shooting}</p>
-                    </div>
-                    <div>
-                        <label for="">PAS</label>
-                        <p name="passing">${item?.passing}</p>
-                    </div>
-                    <div>
-                        <label for="">DRI</label>
-                        <p name="dribbling">${item?.dribbling}</p>
-                    </div>
-                    <div>
-                           <label for="">DEF</label>
-                        <p name="defending">${item?.defending}</p>
-                    </div>
-                    <div>
-                        <label for="">PHY</label>
-                        <p name="physical">${item?.physical}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <img src="src/assets/img/badge_ballon_dor.webp" alt="" id="pofilePhoto">
-    </div>
-
-    `
-    }
-
+    `;
 }
 
-export async function displayCartToStuduem(player) {
 
+export async function displayCartToStuduem(player, curruntPosition) {
 
     switch (player.position) {
         case 'GK':
             const playerContainerGK = await rbCard.querySelector('.PlayerContainerCard');
             if (playerContainerGK.childElementCount === 0) {
-                GKPlayers.GKPlayers.push(player)
-                await localStorage.setItem('GKPlayers', JSON.stringify(GKPlayers))
-                displayEffect()
-            } else if (validPosition()) {
-                changementPlayers.Players.push(player)
-                localStorage.setItem('changementPlayers', JSON.stringify(changementPlayers))
-                displayEffect()
+                addToLocalStorage(player, 'GK')
+            } else {
+                if (changementPlayers.Players.length <= 12) {
+                    let currentPlayer = createObject(player.position, playerContainerGK.firstElementChild)
+                    addToLocalStorage(player, 'GK')
+                    addToLocalStorage(currentPlayer, 'changementPlayers')
+                }
             }
             break;
         case 'CB':
-            const playerContainerCbL = await CbCardL.querySelector('.PlayerContainerCard');
-            const playerContainerCbR = await CbCardR.querySelector('.PlayerContainerCard');
+            const playerContainerCbL = CbCardL.querySelector('.PlayerContainerCard');
+            const playerContainerCbR = CbCardR.querySelector('.PlayerContainerCard');
+            console.log(playerContainerCbL)
             if (playerContainerCbL.childElementCount === 0) {
-                CBLPlayers.CBLPlayers.push(player)
-                await localStorage.setItem('CBLPlayers', JSON.stringify(CBLPlayers))
-                displayEffect()
+                curruntPosition == 'oK' ? addToLocalStorage(player, 'CBL') : curruntPosition === 'CBL' ? addToLocalStorage(player, 'CBL'): addToLocalStorage(player, 'CBR');
             } else if (playerContainerCbR.childElementCount === 0) {
-                CBRPlayers.CBRPlayers.push(player)
-                await localStorage.setItem('CBRPlayers', JSON.stringify(CBRPlayers))
-                displayEffect()
+                curruntPosition == 'oK' ? addToLocalStorage(player, 'CBR') : curruntPosition === 'CBL' ? addToLocalStorage(player, 'CBL'): addToLocalStorage(player, 'CBR');
             } else {
-                changementPlayers.Players.push(player)
-                await localStorage.setItem('changementPlayers', JSON.stringify(changementPlayers))
-                displayEffect()
+                if (changementPlayers.Players.length <= 12) {
+                    curruntPosition === 'CBR' ? addToLocalStorage(player, 'CBR'): addToLocalStorage(player, 'CBL')
+                    let currentPlayer = curruntPosition === 'CBL' ? createObject(player.position, playerContainerCbL.firstElementChild) : createObject(player.position, playerContainerCbR.firstElementChild)
+                    addToLocalStorage(currentPlayer, 'changementPlayers')
+                }
             }
             break;
         case 'LB':
-            const LB = await LBcontainer.querySelector('.PlayerContainerCard');
+            const LB = LBcontainer.querySelector('.PlayerContainerCard');
             if (LB.childElementCount === 0) {
-                LBPlayers.LBPlayers.push(player)
-                await localStorage.setItem('LBPlayers', JSON.stringify(LBPlayers))
-                LB.innerHTML = desplayElement(player)
+                addToLocalStorage(player, 'LB')
             } else {
-                changementPlayers.Players.push(player)
-                await localStorage.setItem('changementPlayers', JSON.stringify(changementPlayers))
-                changement.innerHTML += desplayElement(player)
+                if (changementPlayers.Players.length <= 12) {
+                    addToLocalStorage(player, 'LB')
+                    let currentPlayer = createObject(player.position, LB.firstElementChild)
+                    addToLocalStorage(currentPlayer, 'changementPlayers')
+                }
             }
             break;
         case 'RB':
-            const RB = await RBcontainer.querySelector('.PlayerContainerCard');
+            const RB = RBcontainer.querySelector('.PlayerContainerCard');
             if (RB.childElementCount === 0) {
-                RBPlayers.RBPlayers.push(player)
-                await localStorage.setItem('RBPlayers', JSON.stringify(RBPlayers))
-                displayEffect()
+                addToLocalStorage(player, 'RB')
             } else {
-                changementPlayers.Players.push(player)
-                await localStorage.setItem('changementPlayers', JSON.stringify(changementPlayers))
-                displayEffect()
+                if (changementPlayers.Players.length <= 12) {
+                    addToLocalStorage(player, 'RB')
+                    let currentPlayer = createObject(player.position, RB.firstElementChild)
+                    addToLocalStorage(currentPlayer, 'changementPlayers')
+                }
             }
             break;
-        case 'LM':
-            const LM = await LMcontainer.querySelector('.PlayerContainerCard');
+        case 'LW':
+            const LM = LMcontainer.querySelector('.PlayerContainerCard');
             if (LM.childElementCount === 0) {
-                LMPlayers.LMPlayers.push(player)
-                await localStorage.setItem('LMPlayers', JSON.stringify(LMPlayers))
-                displayEffect()
+                addToLocalStorage(player, 'LW')
             } else {
-                changementPlayers.Players.push(player)
-                await localStorage.setItem('changementPlayers', JSON.stringify(changementPlayers))
-                displayEffect()
+                if (changementPlayers.Players.length <= 12) {
+                    addToLocalStorage(player, 'LW')
+                    let currentPlayer = createObject(player.position, LM.firstElementChild)
+                    addToLocalStorage(currentPlayer, 'changementPlayers')
+                }
             }
             break;
-        case 'RM':
-            const RM = await RMcontainer.querySelector('.PlayerContainerCard');
+        case 'RW':
+            const RM = RMcontainer.querySelector('.PlayerContainerCard');
             if (RM.childElementCount === 0) {
-                RMPlayers.RMPlayers.push(player)
-                await localStorage.setItem('RMPlayers', JSON.stringify(RMPlayers))
-                displayEffect()
+                addToLocalStorage(player, 'RW')
             } else {
-                changementPlayers.Players.push(player)
-                await localStorage.setItem('changementPlayers', JSON.stringify(changementPlayers))
-                displayEffect()
+                if (changementPlayers.Players.length <= 12) {
+                    addToLocalStorage(player, 'RW')
+                    let currentPlayer = createObject(player.position, RM.firstElementChild)
+                    addToLocalStorage(currentPlayer, 'changementPlayers')
+                }
             }
             break;
         case 'CM':
             const playerContainerCML = await CMCardL.querySelector('.PlayerContainerCard');
             const playerContainerCMR = await CMCardR.querySelector('.PlayerContainerCard');
             if (playerContainerCML.childElementCount === 0) {
-                CMLPlayers.CMLPlayers.push(player)
-                await localStorage.setItem('CMLPlayers', JSON.stringify(CMLPlayers))
-                displayEffect()
+                curruntPosition === 'CMR' ? addToLocalStorage(player, 'CMR') : addToLocalStorage(player, 'CML')
             } else if (playerContainerCMR.childElementCount === 0) {
-                CMRPlayers.CMRPlayers.push(player)
-                await localStorage.setItem('CMRPlayers', JSON.stringify(CMRPlayers))
-                displayEffect()
+                curruntPosition === 'CMR' ? addToLocalStorage(player, 'CMR') : addToLocalStorage(player, 'CML')
             } else {
-                changementPlayers.Players.push(player)
-                await localStorage.setItem('changementPlayers', JSON.stringify(changementPlayers))
-                displayEffect()
+                if (changementPlayers.Players.length <= 12) {
+                    curruntPosition === 'CMR' ? addToLocalStorage(player, 'CMR') : addToLocalStorage(player, 'CML')
+                    let currentPlayer = curruntPosition === 'CML' ? createObject(player.position, playerContainerCML.firstElementChild) : createObject(player.position, playerContainerCMR.firstElementChild)
+                    addToLocalStorage(currentPlayer, 'changementPlayers')
+                }
             }
             break;
         case 'ST':
-            const playerContainerSTL = await STCardL.querySelector('.PlayerContainerCard');
-            const playerContainerSTR = await STCardR.querySelector('.PlayerContainerCard');
+            const playerContainerSTL = STCardL.querySelector('.PlayerContainerCard');
+            const playerContainerSTR = STCardR.querySelector('.PlayerContainerCard');
             if (playerContainerSTL.childElementCount === 0) {
-                STLPlayers.STLPlayers.push(player)
-                await localStorage.setItem('STLPlayers', JSON.stringify(STLPlayers))
-                displayEffect()
+                curruntPosition === 'STL' ? addToLocalStorage(player, 'STL') : addToLocalStorage(player, 'STR')
             } else if (playerContainerSTR.childElementCount === 0) {
-                STRPlayers.STRPlayers.push(player)
-                await localStorage.setItem('STRPlayers', JSON.stringify(STRPlayers))
-                displayEffect()
+                curruntPosition === 'STL' ? addToLocalStorage(player, 'STL') : addToLocalStorage(player, 'STR')
             } else {
-                changementPlayers.Players.push(player)
-                await localStorage.setItem('changementPlayers', JSON.stringify(changementPlayers))
-                displayEffect()
+                if (changementPlayers.Players.length <= 12) {
+                    curruntPosition === 'STL' ? addToLocalStorage(player, 'STL') : addToLocalStorage(player, 'STR')
+                    let currentPlayer = curruntPosition === 'STL' ? createObject(player.position, playerContainerSTL.firstElementChild) : createObject(player.position, playerContainerSTR.firstElementChild)
+                    addToLocalStorage(currentPlayer, 'changementPlayers')
+                }
             }
             break;
 
         default:
             break;
     }
+    displayEffect()
 }
 
 export async function displayEffect() {
+    let GKPlayers = JSON.parse(localStorage.getItem('GKPlayers')) || { GKPlayers: [] };
+    let changementPlayers = JSON.parse(localStorage.getItem('changementPlayers')) || { Players: [] };
+    let CBLPlayers = await JSON.parse(localStorage.getItem('CBLPlayers')) || { CBLPlayers: [] };
+    let CBRPlayers = JSON.parse(localStorage.getItem('CBRPlayers')) || { CBRPlayers: [] };
+    let LBPlayers = JSON.parse(localStorage.getItem('LBPlayers')) || { LBPlayers: [] };
+    let RBPlayers = JSON.parse(localStorage.getItem('RBPlayers')) || { RBPlayers: [] };
+    let LMPlayers = JSON.parse(localStorage.getItem('LMPlayers')) || { LMPlayers: [] };
+    let RMPlayers = JSON.parse(localStorage.getItem('RMPlayers')) || { RMPlayers: [] };
+    let CMLPlayers = JSON.parse(localStorage.getItem('CMLPlayers')) || { CMLPlayers: [] };
+    let CMRPlayers = JSON.parse(localStorage.getItem('CMRPlayers')) || { CMRPlayers: [] };
+    let STLPlayers = JSON.parse(localStorage.getItem('STLPlayers')) || { STLPlayers: [] };
+    let STRPlayers = JSON.parse(localStorage.getItem('STRPlayers')) || { STRPlayers: [] };
 
+    GKPlayers.GKPlayers.length !== 0 ? playerContainerGK.innerHTML = displayElement(GKPlayers?.GKPlayers[0]) : '';
+    CBLPlayers.CBLPlayers.length !== 0 ? playerContainerCbL.innerHTML = displayElement(CBLPlayers?.CBLPlayers[0]) : '';
+    CBRPlayers.CBRPlayers.length !== 0 ? playerContainerCbR.innerHTML = displayElement(CBRPlayers?.CBRPlayers[0]) : '';
+    LBPlayers.LBPlayers.length !== 0 ? LB.innerHTML = displayElement(LBPlayers?.LBPlayers[0]) : '';
+    RBPlayers.RBPlayers.length !== 0 ? RB.innerHTML = displayElement(RBPlayers?.RBPlayers[0]) : '';
+    LMPlayers.LMPlayers.length !== 0 ? LM.innerHTML = displayElement(LMPlayers?.LMPlayers[0]) : '';
+    RMPlayers.RMPlayers.length !== 0 ? RM.innerHTML = displayElement(RMPlayers?.RMPlayers[0]) : '';
+    CMLPlayers.CMLPlayers.length !== 0 ? playerContainerCML.innerHTML = displayElement(CMLPlayers?.CMLPlayers[0]) : '';
+    CMRPlayers.CMRPlayers.length !== 0 ? playerContainerCMR.innerHTML = displayElement(CMRPlayers?.CMRPlayers[0]) : '';
+    STLPlayers.STLPlayers.length !== 0 ? playerContainerSTL.innerHTML = displayElement(STLPlayers?.STLPlayers[0]) : '';
+    STRPlayers.STRPlayers.length !== 0 ? playerContainerSTR.innerHTML = displayElement(STRPlayers?.STRPlayers[0]) : '';
 
-    GKPlayers.GKPlayers.length !== 0 ? playerContainerGK.innerHTML = desplayElement(GKPlayers?.GKPlayers[0]) : '';
-    CBLPlayers.CBLPlayers.length !== 0 ? playerContainerCbL.innerHTML = desplayElement(CBLPlayers?.CBLPlayers[0]) : '';
-    CBRPlayers.CBRPlayers.length !== 0 ? playerContainerCbR.innerHTML = desplayElement(CBRPlayers?.CBRPlayers[0]) : '';
-    LBPlayers.LBPlayers.length !== 0 ? LB.innerHTML = desplayElement(LBPlayers?.LBPlayers[0]) : '';
-    RBPlayers.RBPlayers.length !== 0 ? RB.innerHTML = desplayElement(RBPlayers?.RBPlayers[0]) : '';
-    LMPlayers.LMPlayers.length !== 0 ? LM.innerHTML = desplayElement(LMPlayers?.LMPlayers[0]) : '';
-    RMPlayers.RMPlayers.length !== 0 ? RM.innerHTML = desplayElement(RMPlayers?.RMPlayers[0]) : '';
-    CMLPlayers.CMLPlayers.length !== 0 ? playerContainerCML.innerHTML = desplayElement(CMLPlayers?.CMLPlayers[0]) : '';
-    CMRPlayers.CMRPlayers.length !== 0 ? playerContainerCMR.innerHTML = desplayElement(CMRPlayers?.CMRPlayers[0]) : '';
-    STLPlayers.STLPlayers.length !== 0 ? playerContainerSTL.innerHTML = desplayElement(STLPlayers?.STLPlayers[0]) : '';
-    STRPlayers.STRPlayers.length !== 0 ? playerContainerSTR.innerHTML = desplayElement(STRPlayers?.STRPlayers[0]) : '';
+    console.log(CBLPlayers.CBLPlayers.length)
 
     if (changementPlayers.Players !== undefined) {
-        changementPlayers?.Players.forEach((element , index) => {
-            playerContainers[index].innerHTML = desplayElement(element)
+        changementPlayers?.Players.forEach((element, index) => {
+            playerContainers[index].innerHTML = displayElement(element)
         })
     }
 }
