@@ -1,6 +1,6 @@
 export function inputValidat(data) {
     if (data.id === 'name' || data.id === 'nationality' || data.id === 'club') {
-        const regex = /^[A-Za-z\s]{1,15}$/;
+        const regex = /^[A-Za-z\s]{1,20}$/;
         return !regex.test(data.value);
     }
     

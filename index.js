@@ -1,6 +1,5 @@
-import { desplayElement, displayCartToStuduem } from './display.js'
+import { desplayElement, displayCartToStuduem , displayEffect} from './display.js'
 import { inputValidat } from './validation.js'
-import { uploadToImgBB } from './convertIMG.js'
 
 const positionSelect = document.getElementById('positionSelect')
 const numInputsGK = document.getElementsByClassName('GKinputs')[0]
@@ -186,4 +185,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     await GKPlayers !== null ? displayCartToStuduem(GKPlayers) : '' ;
     await data === null ? getPlayers() : displayCards(data);
     displayCards(playerContainerGK, GKPlayers)
+    displayEffect()
 })
