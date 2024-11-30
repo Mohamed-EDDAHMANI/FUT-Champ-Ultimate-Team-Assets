@@ -205,10 +205,14 @@ function dragAndDrop() {
     const cards = document.querySelectorAll('.cardChangements')
     const studiemCard = document.querySelectorAll('.PlayerContainerCard')
     const changement = document.querySelectorAll('.PlayerContainerCard-changement')
-
+    const ca = document.querySelectorAll('.PlayerContainerCard-changement.cardChangements')
+    console.log(cards)
+    console.log(ca)
     cards.forEach(item => {
         item.addEventListener('dragstart', () => {
             item.classList.add('isdragin')
+            console.log('hello')
+            console.log(ca)
         })
         item.addEventListener('dragend', () => {
             item.classList.remove('isdragin')
@@ -220,6 +224,8 @@ function dragAndDrop() {
         item.addEventListener('dragover', (e) => {
             e.preventDefault();
             draginEle = document.querySelector('.isdragin');
+            // console.log(item?.getAttribute('data-position'));
+            // console.log(draginEle.getAttribute('data-position'))
             if (draginEle && item?.getAttribute('data-position') == draginEle.getAttribute('data-position')) {
                 item.classList.add('boxdragin')
 
@@ -245,28 +251,32 @@ function dragAndDrop() {
             displayCartToStuduem(playerData, secondClass)
         })
     })
+    changement.forEach(item => {
+        let draginEle;
+        item.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            draginEle = document.querySelector('.isdragin');
+            console.log(draginEle)
+            // console.log(item?.getAttribute('data-position'));
+            // console.log(draginEle.getAttribute('data-position'))
+            if (draginEle && item?.getAttribute('data-position') == draginEle.getAttribute('data-position')) {
+                item.classList.add('boxdragin')
 
-    // changement.forEach(item, index => {
-    //     let draginEle;
+            } else {
+                item.classList.add('redbox')
+            }
+        })
+        item.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            item.classList.remove('redbox')
+            item.classList.remove('boxdragin')
+        })
 
-    //     item.addEventListener('dragover', (e) => {
-    //         e.preventDefault();
-    //         draginEle = document.querySelector('.isdragin');
-    //         item.classList.add('changmentDraged')
-    //     })
-    //     item.addEventListener('dragleave', (e) => {
-    //         e.preventDefault();
-    //         item.classList.remove('changmentDraged')
-    //     })
-    //     item.addEventListener('drop', () => {
-    //         item.classList.remove('changmentDraged');
+        item.addEventListener('drop', () => {
+            item.classList.remove('boxdragin');
+            item.classList.remove('isdragin')
+            item.classList.remove('redbox')
 
-    //         let playerData = createObject(item.dataset.position, draginEle)
-
-    //         const cardClasses = item.closest('.card-empty').className.split(' ');
-    //         const secondClass = cardClasses[1];
-    //         displayCartToStuduem(playerData, secondClass)
-    //     })
-
-    // })
+        })
+    })
 }

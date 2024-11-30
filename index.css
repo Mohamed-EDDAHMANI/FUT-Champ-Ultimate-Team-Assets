@@ -394,6 +394,7 @@ input[type="number"]::-webkit-outer-spin-button {
     filter: drop-shadow(0px 0px 10px  rgb(7, 15, 239));
 }
 .cardChangements{
+    z-index: 900;
     transform: translateY(-25px);
     z-index: 500;
     position: relative;

@@ -87,7 +87,6 @@ export function addToLocalStorage(player, position) {
     const CMRPlayers = JSON.parse(localStorage.getItem('CMRPlayers')) || { CMRPlayers: [] };
     const STLPlayers = JSON.parse(localStorage.getItem('STLPlayers')) || { STLPlayers: [] };
     const STRPlayers = JSON.parse(localStorage.getItem('STRPlayers')) || { STRPlayers: [] };
-    console.log(position)
 
     switch (position) {
         case 'GK':

@@ -141,9 +141,9 @@ export async function displayCartToStuduem(player, curruntPosition) {
             const playerContainerCbR = CbCardR.querySelector('.PlayerContainerCard');
             console.log(playerContainerCbL)
             if (playerContainerCbL.childElementCount === 0) {
-                curruntPosition == 'oK' ? addToLocalStorage(player, 'CBL') : curruntPosition === 'CBL' ? addToLocalStorage(player, 'CBL'): addToLocalStorage(player, 'CBR');
+                curruntPosition == 'ok' ? addToLocalStorage(player, 'CBL') : curruntPosition === 'CBL' ? addToLocalStorage(player, 'CBL'): addToLocalStorage(player, 'CBR');
             } else if (playerContainerCbR.childElementCount === 0) {
-                curruntPosition == 'oK' ? addToLocalStorage(player, 'CBR') : curruntPosition === 'CBL' ? addToLocalStorage(player, 'CBL'): addToLocalStorage(player, 'CBR');
+                curruntPosition == 'ok' ? addToLocalStorage(player, 'CBR') : curruntPosition === 'CBL' ? addToLocalStorage(player, 'CBL'): addToLocalStorage(player, 'CBR');
             } else {
                 if (changementPlayers.Players.length <= 12) {
                     curruntPosition === 'CBR' ? addToLocalStorage(player, 'CBR'): addToLocalStorage(player, 'CBL')
@@ -204,9 +204,9 @@ export async function displayCartToStuduem(player, curruntPosition) {
             const playerContainerCML = await CMCardL.querySelector('.PlayerContainerCard');
             const playerContainerCMR = await CMCardR.querySelector('.PlayerContainerCard');
             if (playerContainerCML.childElementCount === 0) {
-                curruntPosition === 'CMR' ? addToLocalStorage(player, 'CMR') : addToLocalStorage(player, 'CML')
+                curruntPosition == 'ok' ? addToLocalStorage(player, 'CML') : curruntPosition === 'CML' ? addToLocalStorage(player, 'CML'): addToLocalStorage(player, 'CMR');
             } else if (playerContainerCMR.childElementCount === 0) {
-                curruntPosition === 'CMR' ? addToLocalStorage(player, 'CMR') : addToLocalStorage(player, 'CML')
+                curruntPosition == 'ok' ? addToLocalStorage(player, 'CMR') : curruntPosition === 'CML' ? addToLocalStorage(player, 'CML'): addToLocalStorage(player, 'CMR');
             } else {
                 if (changementPlayers.Players.length <= 12) {
                     curruntPosition === 'CMR' ? addToLocalStorage(player, 'CMR') : addToLocalStorage(player, 'CML')
@@ -219,9 +219,9 @@ export async function displayCartToStuduem(player, curruntPosition) {
             const playerContainerSTL = STCardL.querySelector('.PlayerContainerCard');
             const playerContainerSTR = STCardR.querySelector('.PlayerContainerCard');
             if (playerContainerSTL.childElementCount === 0) {
-                curruntPosition === 'STL' ? addToLocalStorage(player, 'STL') : addToLocalStorage(player, 'STR')
+                curruntPosition == 'ok' ? addToLocalStorage(player, 'STL') : curruntPosition === 'STL' ? addToLocalStorage(player, 'STL'): addToLocalStorage(player, 'STR');
             } else if (playerContainerSTR.childElementCount === 0) {
-                curruntPosition === 'STL' ? addToLocalStorage(player, 'STL') : addToLocalStorage(player, 'STR')
+                curruntPosition == 'ok' ? addToLocalStorage(player, 'STR') : curruntPosition === 'STR' ? addToLocalStorage(player, 'STR'): addToLocalStorage(player, 'STL');
             } else {
                 if (changementPlayers.Players.length <= 12) {
                     curruntPosition === 'STL' ? addToLocalStorage(player, 'STL') : addToLocalStorage(player, 'STR')
@@ -240,7 +240,7 @@ export async function displayCartToStuduem(player, curruntPosition) {
 export async function displayEffect() {
     let GKPlayers = JSON.parse(localStorage.getItem('GKPlayers')) || { GKPlayers: [] };
     let changementPlayers = JSON.parse(localStorage.getItem('changementPlayers')) || { Players: [] };
-    let CBLPlayers = await JSON.parse(localStorage.getItem('CBLPlayers')) || { CBLPlayers: [] };
+    let CBLPlayers = JSON.parse(localStorage.getItem('CBLPlayers')) || { CBLPlayers: [] };
     let CBRPlayers = JSON.parse(localStorage.getItem('CBRPlayers')) || { CBRPlayers: [] };
     let LBPlayers = JSON.parse(localStorage.getItem('LBPlayers')) || { LBPlayers: [] };
     let RBPlayers = JSON.parse(localStorage.getItem('RBPlayers')) || { RBPlayers: [] };
@@ -263,7 +263,6 @@ export async function displayEffect() {
     STLPlayers.STLPlayers.length !== 0 ? playerContainerSTL.innerHTML = displayElement(STLPlayers?.STLPlayers[0]) : '';
     STRPlayers.STRPlayers.length !== 0 ? playerContainerSTR.innerHTML = displayElement(STRPlayers?.STRPlayers[0]) : '';
 
-    console.log(CBLPlayers.CBLPlayers.length)
 
     if (changementPlayers.Players !== undefined) {
         changementPlayers?.Players.forEach((element, index) => {
