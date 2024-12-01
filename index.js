@@ -9,12 +9,11 @@ const formData = document.getElementById('formData')
 const numInputs = document.getElementById('numInputs')
 const InputGK = document.getElementById('numInputsGK')
 const cardsChangementsContainer = document.getElementById('cardsChangementsContainer')
-const rbCard = await document.querySelector('.card-empty.GK');
-const playerContainerGK = await rbCard.querySelector('.PlayerContainerCard');
+const rbCard = document.querySelector('.card-empty.GK');
+const playerContainerGK = rbCard.querySelector('.PlayerContainerCard');
 
 //localStorage Data
 const data = JSON.parse(localStorage.getItem('players'))
-const GKPlayers = JSON.parse(localStorage.getItem('GKPlayers'))
 
 
 
@@ -30,10 +29,9 @@ async function getPlayers() {
     }
 }
 async function displayCards(data) {
-    data?.players.forEach(item => {
+    data?.Players.forEach(item => {
         cardsChangementsContainer.innerHTML += displayElement(item)
     });
-    dragAndDrop()
 }
 
 document.getElementById('photo').addEventListener('change', () => {
@@ -53,6 +51,7 @@ document.getElementById('logo').addEventListener('change', () => {
 formData.addEventListener('submit', async function (event) {
     event.preventDefault();
 
+    const formData = document.getElementById('formData');
     const name = document.getElementById('name');
     const nationality = document.getElementById('nationality');
     const club = document.getElementById('club');
@@ -106,7 +105,6 @@ formData.addEventListener('submit', async function (event) {
         console.error('invalide Values')
 
     } else {
-        const players = JSON.parse(localStorage.getItem('players'))
         if (positionSelect.value === 'GK') {
             const data = {
                 name: name.value,
@@ -125,10 +123,6 @@ formData.addEventListener('submit', async function (event) {
                 positioning: document.querySelector('input[name="positioning"]').value
             }
             await displayCartToStuduem(data, 'ok')
-            if (!players.players.includes(data)) {
-                players.players.push(data)
-            }
-            await localStorage.setItem('players', JSON.stringify(players))
         } else {
             const data = {
                 name: name.value,
@@ -147,12 +141,10 @@ formData.addEventListener('submit', async function (event) {
                 physical: document.querySelector('input[name="physical"]').value
             }
             displayCartToStuduem(data, 'ok')
-            if (!players.players.includes(data)) {
-                players.players.push(data)
-            }
-            await localStorage.setItem('players', JSON.stringify(players))
         }
+        formData.reset();
     }
+    displayEffect()
 });
 
 
@@ -184,16 +176,18 @@ positionSelect.addEventListener('change', () => {
     }
 })
 
-
 document.addEventListener('DOMContentLoaded', async () => {
-    await GKPlayers !== null ? displayCartToStuduem(GKPlayers, 'ok') : '';
-    await data === null ? getPlayers() : displayCards(data);
     displayEffect()
+    data ? displayCards(data) : getPlayers() ;
+    dragAndDrop()
 })
 
 
 
-
+// delete function 
+function deletePlayerById(id) {
+    deleteById(id)
+}
 
 
 //drag 
@@ -203,80 +197,66 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function dragAndDrop() {
     const cards = document.querySelectorAll('.cardChangements')
-    const studiemCard = document.querySelectorAll('.PlayerContainerCard')
-    const changement = document.querySelectorAll('.PlayerContainerCard-changement')
-    const ca = document.querySelectorAll('.PlayerContainerCard-changement.cardChangements')
+    const studiemCard = document.querySelectorAll('.PlayerContainerCard');
+    const Delete = document.getElementById('Delete');
     console.log(cards)
-    console.log(ca)
     cards.forEach(item => {
         item.addEventListener('dragstart', () => {
-            item.classList.add('isdragin')
-            console.log('hello')
-            console.log(ca)
-        })
+            console.log(cards.length)
+            item.classList.add('isdragin');
+        });
+
         item.addEventListener('dragend', () => {
-            item.classList.remove('isdragin')
-        })
-    })
+            item.classList.remove('isdragin');
+        });
+    });
 
     studiemCard.forEach(item => {
-        let draginEle;
         item.addEventListener('dragover', (e) => {
             e.preventDefault();
-            draginEle = document.querySelector('.isdragin');
-            // console.log(item?.getAttribute('data-position'));
-            // console.log(draginEle.getAttribute('data-position'))
-            if (draginEle && item?.getAttribute('data-position') == draginEle.getAttribute('data-position')) {
-                item.classList.add('boxdragin')
+            const draginEle = document.querySelector('.isdragin');
+            console.log(draginEle)
 
+            if (draginEle && item?.getAttribute('data-position') === draginEle?.getAttribute('data-position')) {
+                item.classList.add('boxdragin');
             } else {
-                item.classList.add('redbox')
+                item.classList.add('redbox');
             }
-        })
+        });
+
         item.addEventListener('dragleave', (e) => {
             e.preventDefault();
-            item.classList.remove('redbox')
-            item.classList.remove('boxdragin')
-        })
+            item.classList.remove('boxdragin', 'redbox');
+        });
 
         item.addEventListener('drop', () => {
-            item.classList.remove('boxdragin');
-            item.classList.remove('isdragin')
-            item.classList.remove('redbox')
-            let playerData = createObject(item.dataset.position, draginEle)
+            item.classList.remove('boxdragin', 'redbox');
+            const draginEle = document.querySelector('.isdragin');
+            console.log(draginEle)
+            const playerData = createObject(item.dataset.position, draginEle);
 
             const cardClasses = item.closest('.card-empty').className.split(' ');
             const secondClass = cardClasses[1];
-            console.log(secondClass)
-            displayCartToStuduem(playerData, secondClass)
-        })
-    })
-    changement.forEach(item => {
-        let draginEle;
-        item.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            draginEle = document.querySelector('.isdragin');
-            console.log(draginEle)
-            // console.log(item?.getAttribute('data-position'));
-            // console.log(draginEle.getAttribute('data-position'))
-            if (draginEle && item?.getAttribute('data-position') == draginEle.getAttribute('data-position')) {
-                item.classList.add('boxdragin')
+            displayCartToStuduem(playerData, secondClass);
+        });
+    });
 
-            } else {
-                item.classList.add('redbox')
-            }
-        })
-        item.addEventListener('dragleave', (e) => {
-            e.preventDefault();
-            item.classList.remove('redbox')
-            item.classList.remove('boxdragin')
-        })
+    Delete.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        Delete.style.padding = '30px 32px';
+        Delete.firstChild.style.size = '50px'
+    });
+    Delete.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        Delete.style.padding = '10px 12px';
+    });
 
-        item.addEventListener('drop', () => {
-            item.classList.remove('boxdragin');
-            item.classList.remove('isdragin')
-            item.classList.remove('redbox')
+    Delete.addEventListener('drop', () => {
+        const draginEle = document.querySelector('.isdragin');
+        Delete.style.backgroundColor = 'red';
+        console.log(draginEle)
+        deletePlayerById(draginEle.id);
+        Delete.style.padding = '10px 12px';
+    });
 
-        })
-    })
 }

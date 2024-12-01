@@ -27,20 +27,19 @@ export function inputValidat(data) {
     }
 
     if (Array.isArray(data)) {
+        const regex = /https?:\/\/[\w-]+(?:\.[\w-]+)+\/[\w\/.-]+\.(?:jpg|jpeg|png|gif|bmp|webp)/;
         for (let i = 0; i < data.length; i++) {
-            if (data[i].value.length !== 0) {
-                return false;
-            }
+            return !regex.test(data[i].value);
         }
-        return true;
     }
 }
 
 export function createObject(position, container) {
-
+    console.log(container)
     let playerData
     if (position === 'GK') {
         playerData = {
+            id: container.id,
             name: container.querySelector('.infoContainer h4').textContent,
             photo: container.querySelector('.picDiv img').src,
             position: container.dataset.position,
@@ -57,6 +56,7 @@ export function createObject(position, container) {
         return playerData
     } else {
         playerData = {
+            id: container.id,
             name: container.querySelector('.infoContainer h4').textContent,
             photo: container.querySelector('.picDiv img').src,
             position: container.dataset.position,
@@ -75,72 +75,72 @@ export function createObject(position, container) {
 }
 
 export function addToLocalStorage(player, position) {
-    const GKPlayers = JSON.parse(localStorage.getItem('GKPlayers')) || { GKPlayers: [] };
+    const GKPlayers = JSON.parse(localStorage.getItem('GKPlayers')) || { Players: [] };
     const changementPlayers = JSON.parse(localStorage.getItem('changementPlayers')) || { Players: [] };
-    const CBLPlayers = JSON.parse(localStorage.getItem('CBPlayers')) || { CBLPlayers: [] };
-    const CBRPlayers = JSON.parse(localStorage.getItem('CBRPlayers')) || { CBRPlayers: [] };
-    const LBPlayers = JSON.parse(localStorage.getItem('LBPlayers')) || { LBPlayers: [] };
-    const RBPlayers = JSON.parse(localStorage.getItem('RBPlayers')) || { RBPlayers: [] };
-    const LMPlayers = JSON.parse(localStorage.getItem('LMPlayers')) || { LMPlayers: [] };
-    const RMPlayers = JSON.parse(localStorage.getItem('RMPlayers')) || { RMPlayers: [] };
-    const CMLPlayers = JSON.parse(localStorage.getItem('CMLPlayers')) || { CMLPlayers: [] };
-    const CMRPlayers = JSON.parse(localStorage.getItem('CMRPlayers')) || { CMRPlayers: [] };
-    const STLPlayers = JSON.parse(localStorage.getItem('STLPlayers')) || { STLPlayers: [] };
-    const STRPlayers = JSON.parse(localStorage.getItem('STRPlayers')) || { STRPlayers: [] };
+    const CBLPlayers = JSON.parse(localStorage.getItem('CBPlayers')) || { Players: [] };
+    const CBRPlayers = JSON.parse(localStorage.getItem('CBRPlayers')) || { Players: [] };
+    const LBPlayers = JSON.parse(localStorage.getItem('LBPlayers')) || { Players: [] };
+    const RBPlayers = JSON.parse(localStorage.getItem('RBPlayers')) || { Players: [] };
+    const LMPlayers = JSON.parse(localStorage.getItem('LMPlayers')) || { Players: [] };
+    const RMPlayers = JSON.parse(localStorage.getItem('RMPlayers')) || { Players: [] };
+    const CMLPlayers = JSON.parse(localStorage.getItem('CMLPlayers')) || { Players: [] };
+    const CMRPlayers = JSON.parse(localStorage.getItem('CMRPlayers')) || { Players: [] };
+    const STLPlayers = JSON.parse(localStorage.getItem('STLPlayers')) || { Players: [] };
+    const STRPlayers = JSON.parse(localStorage.getItem('STRPlayers')) || { Players: [] };
 
     switch (position) {
         case 'GK':
-            GKPlayers.GKPlayers.splice(0, 0, player)
+            GKPlayers.Players.splice(0, 0, player)
             localStorage.setItem('GKPlayers', JSON.stringify(GKPlayers))
             break;
     
         case 'CBL':
-            CBLPlayers.CBLPlayers.splice(0, 0, player)
+            CBLPlayers.Players.splice(0, 0, player)
             localStorage.setItem('CBLPlayers', JSON.stringify(CBLPlayers))
             break;
     
         case 'CBR':
-            CBRPlayers.CBRPlayers.splice(0, 0, player)
+            CBRPlayers.Players.splice(0, 0, player)
             localStorage.setItem('CBRPlayers', JSON.stringify(CBRPlayers))
             break;
     
         case 'LB':
-            LBPlayers.LBPlayers.splice(0, 0, player)
+            LBPlayers.Players.splice(0, 0, player)
             localStorage.setItem('LBPlayers', JSON.stringify(LBPlayers))
             break;
     
         case 'RB':
-            RBPlayers.RBPlayers.splice(0, 0, player)
+            RBPlayers.Players.splice(0, 0, player)
             localStorage.setItem('RBPlayers', JSON.stringify(RBPlayers))
             break;
     
         case 'LW':
-            LMPlayers.LMPlayers.splice(0, 0, player)
+            LMPlayers.Players.splice(0, 0, player)
             localStorage.setItem('LMPlayers', JSON.stringify(LMPlayers))
             break;
     
         case 'RW':
-            RMPlayers.RMPlayers.splice(0, 0, player)
+            RMPlayers.Players.splice(0, 0, player)
             localStorage.setItem('RMPlayers', JSON.stringify(RMPlayers))
             break;
     
         case 'CML':
-            CMLPlayers.CMLPlayers.splice(0, 0, player)
+            CMLPlayers.Players.splice(0, 0, player)
             localStorage.setItem('CMLPlayers', JSON.stringify(CMLPlayers))
             break;
     
         case 'CMR':
-            CMRPlayers.CMRPlayers.splice(0, 0, player)
+            CMRPlayers.Players.splice(0, 0, player)
             localStorage.setItem('CMRPlayers', JSON.stringify(CMRPlayers))
             break;
     
         case 'STL':
-            STLPlayers.STLPlayers.splice(0, 0, player)
+            STLPlayers.Players.splice(0, 0, player)
             localStorage.setItem('STLPlayers', JSON.stringify(STLPlayers))
             break;
     
         case 'STR':
-            STRPlayers.STRPlayers.splice(0, 0, player)
+            STRPlayers.Players.splice(0, 0, player)
             localStorage.setItem('STRPlayers', JSON.stringify(STRPlayers))
             break;
     

@@ -24,8 +24,10 @@ const playerContainerCMR = CMCardR.querySelector('.PlayerContainerCard');
 const playerContainerSTL = STCardL.querySelector('.PlayerContainerCard');
 const playerContainerSTR = STCardR.querySelector('.PlayerContainerCard');
 
-const playerContainers = document.querySelectorAll('.PlayerContainerCard-changement');
+const playerContainers = document.querySelectorAll('.card-empty-changement');
 let changementPlayers = JSON.parse(localStorage.getItem('changementPlayers')) || { Players: [] };
+
+
 
 export function displayElement(item) {
     const isGoalkeeper = item?.position === 'GK';
@@ -84,15 +86,15 @@ export function displayElement(item) {
             </div>
         `;
 
-    const badge = isGoalkeeper
+        const badge = isGoalkeeper
         ? "src/assets/img/badge_total_rush.webp"
         : "src/assets/img/badge_ballon_dor.webp";
 
     return `
-        <div class="cardChangements" draggable="true" data-position="${item?.position}">
+        <div class="cardChangements" draggable="true" data-position="${item?.position}" id="${item?.id}" >
             <div class="editContainer">
-                <button><i class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
-                <button><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></button>
+                <button><i class="fa-solid fa-trash" style="color: #ffffff;" onclick="deleteById(${item?.id})"></i></button>
+                <button><i class="fa-regular fa-pen-to-square" style="color: #ffffff;" onclick="modifier(${item.id})"></i></button>
             </div>
             <div class="flag">
                 <img src="${item?.flag}" alt="flagPic" class="flagPic" draggable="false">
@@ -120,9 +122,9 @@ export function displayElement(item) {
     `;
 }
 
-
 export async function displayCartToStuduem(player, curruntPosition) {
-
+    player.id === undefined ? player.id  = generateId() + 1 : '' ;
+    console.log(player.id)
     switch (player.position) {
         case 'GK':
             const playerContainerGK = await rbCard.querySelector('.PlayerContainerCard');
@@ -139,7 +141,6 @@ export async function displayCartToStuduem(player, curruntPosition) {
         case 'CB':
             const playerContainerCbL = CbCardL.querySelector('.PlayerContainerCard');
             const playerContainerCbR = CbCardR.querySelector('.PlayerContainerCard');
-            console.log(playerContainerCbL)
             if (playerContainerCbL.childElementCount === 0) {
                 curruntPosition == 'ok' ? addToLocalStorage(player, 'CBL') : curruntPosition === 'CBL' ? addToLocalStorage(player, 'CBL'): addToLocalStorage(player, 'CBR');
             } else if (playerContainerCbR.childElementCount === 0) {
@@ -222,6 +223,7 @@ export async function displayCartToStuduem(player, curruntPosition) {
                 curruntPosition == 'ok' ? addToLocalStorage(player, 'STL') : curruntPosition === 'STL' ? addToLocalStorage(player, 'STL'): addToLocalStorage(player, 'STR');
             } else if (playerContainerSTR.childElementCount === 0) {
                 curruntPosition == 'ok' ? addToLocalStorage(player, 'STR') : curruntPosition === 'STR' ? addToLocalStorage(player, 'STR'): addToLocalStorage(player, 'STL');
+                console.log(curruntPosition === 'STR')
             } else {
                 if (changementPlayers.Players.length <= 12) {
                     curruntPosition === 'STL' ? addToLocalStorage(player, 'STL') : addToLocalStorage(player, 'STR')
@@ -237,36 +239,41 @@ export async function displayCartToStuduem(player, curruntPosition) {
     displayEffect()
 }
 
-export async function displayEffect() {
-    let GKPlayers = JSON.parse(localStorage.getItem('GKPlayers')) || { GKPlayers: [] };
-    let changementPlayers = JSON.parse(localStorage.getItem('changementPlayers')) || { Players: [] };
-    let CBLPlayers = JSON.parse(localStorage.getItem('CBLPlayers')) || { CBLPlayers: [] };
-    let CBRPlayers = JSON.parse(localStorage.getItem('CBRPlayers')) || { CBRPlayers: [] };
-    let LBPlayers = JSON.parse(localStorage.getItem('LBPlayers')) || { LBPlayers: [] };
-    let RBPlayers = JSON.parse(localStorage.getItem('RBPlayers')) || { RBPlayers: [] };
-    let LMPlayers = JSON.parse(localStorage.getItem('LMPlayers')) || { LMPlayers: [] };
-    let RMPlayers = JSON.parse(localStorage.getItem('RMPlayers')) || { RMPlayers: [] };
-    let CMLPlayers = JSON.parse(localStorage.getItem('CMLPlayers')) || { CMLPlayers: [] };
-    let CMRPlayers = JSON.parse(localStorage.getItem('CMRPlayers')) || { CMRPlayers: [] };
-    let STLPlayers = JSON.parse(localStorage.getItem('STLPlayers')) || { STLPlayers: [] };
-    let STRPlayers = JSON.parse(localStorage.getItem('STRPlayers')) || { STRPlayers: [] };
-
-    GKPlayers.GKPlayers.length !== 0 ? playerContainerGK.innerHTML = displayElement(GKPlayers?.GKPlayers[0]) : '';
-    CBLPlayers.CBLPlayers.length !== 0 ? playerContainerCbL.innerHTML = displayElement(CBLPlayers?.CBLPlayers[0]) : '';
-    CBRPlayers.CBRPlayers.length !== 0 ? playerContainerCbR.innerHTML = displayElement(CBRPlayers?.CBRPlayers[0]) : '';
-    LBPlayers.LBPlayers.length !== 0 ? LB.innerHTML = displayElement(LBPlayers?.LBPlayers[0]) : '';
-    RBPlayers.RBPlayers.length !== 0 ? RB.innerHTML = displayElement(RBPlayers?.RBPlayers[0]) : '';
-    LMPlayers.LMPlayers.length !== 0 ? LM.innerHTML = displayElement(LMPlayers?.LMPlayers[0]) : '';
-    RMPlayers.RMPlayers.length !== 0 ? RM.innerHTML = displayElement(RMPlayers?.RMPlayers[0]) : '';
-    CMLPlayers.CMLPlayers.length !== 0 ? playerContainerCML.innerHTML = displayElement(CMLPlayers?.CMLPlayers[0]) : '';
-    CMRPlayers.CMRPlayers.length !== 0 ? playerContainerCMR.innerHTML = displayElement(CMRPlayers?.CMRPlayers[0]) : '';
-    STLPlayers.STLPlayers.length !== 0 ? playerContainerSTL.innerHTML = displayElement(STLPlayers?.STLPlayers[0]) : '';
-    STRPlayers.STRPlayers.length !== 0 ? playerContainerSTR.innerHTML = displayElement(STRPlayers?.STRPlayers[0]) : '';
+function generateId() {
+    const data = JSON.parse(localStorage.getItem('players'))
+    return data.Players.length
+}
 
 
-    if (changementPlayers.Players !== undefined) {
-        changementPlayers?.Players.forEach((element, index) => {
-            playerContainers[index].innerHTML = displayElement(element)
-        })
+export function displayEffect() {
+    const positions = [
+        { key: 'GKPlayers', container: playerContainerGK },
+        { key: 'CBLPlayers', container: playerContainerCbL },
+        { key: 'CBRPlayers', container: playerContainerCbR },
+        { key: 'LBPlayers', container: LB },
+        { key: 'RBPlayers', container: RB },
+        { key: 'LMPlayers', container: LM },
+        { key: 'RMPlayers', container: RM },
+        { key: 'CMLPlayers', container: playerContainerCML },
+        { key: 'CMRPlayers', container: playerContainerCMR },
+        { key: 'STLPlayers', container: playerContainerSTL },
+        { key: 'STRPlayers', container: playerContainerSTR },
+    ];
+
+    positions.forEach(({ key, container }) => {
+        const data = JSON.parse(localStorage.getItem(key)) || { Players: [] };
+        if (data.Players.length > 0) {
+            container.innerHTML = displayElement(data.Players[0]);
+        }
+    });
+
+    const changementPlayers = JSON.parse(localStorage.getItem('changementPlayers')) || { Players: [] };
+
+    if (Array.isArray(changementPlayers.Players) && changementPlayers.Players.length > 0) {
+        changementPlayers.Players.forEach((player, index) => {
+            if (playerContainers[index]) {
+                playerContainers[index].innerHTML = displayElement(player);
+            }
+        });
     }
 }
